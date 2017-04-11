@@ -34,7 +34,7 @@ public class Generator extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //test comment
-        //just another test comment
+        //just another test comment edited
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_generator, menu);
         return true;
