@@ -17,9 +17,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /** Called when the user taps the Send button */
+    // Called when the user taps the Send button
     public void sendMessage(View view) {
+        //clearing generator fields
         gen.clear();
+        //fetching data from user
         String data;
         EditText editText2 = (EditText) findViewById(R.id.editText2);
         data = editText2.getText().toString();
@@ -36,12 +38,15 @@ public class MainActivity extends AppCompatActivity {
         EditText editText6 = (EditText) findViewById(R.id.editText6);
         data = editText6.getText().toString();
         gen.insert(data);
+        //generating
         gen.generate();
+        //creating new activity
         Intent intent = new Intent(this, GeneratorActivity.class);
+        //sending additional text info to new activity
         EditText editText = (EditText) findViewById(R.id.editText);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
+        //starting new activity with results
         startActivity(intent);
-
     }
 }

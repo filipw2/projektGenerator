@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+//Singleton
 public class Generator {
-    int size=0;
-    private List data;
-    private List pass;
+    int size=0; //count of used data fields
+    private List data; //user data
+    private List pass; //generated passwords
 
     public static Generator instance;
 
@@ -20,9 +21,9 @@ public class Generator {
 
     public void generate(){
         String generated;
+        //selecting random field from user data
         Random rn = new Random();
         for(int i=0; i<3; i++){
-            //out of range exeption here randomly
             int randomNum =  rn.nextInt(size-1 - 0 + 1) + 0;
             generated= (String) data.get(randomNum);
             pass.add(generated);
@@ -32,14 +33,6 @@ public class Generator {
     private Generator() {
         data = new ArrayList();
         pass = new ArrayList();
-        /*test fragment here
-        insert("imie");
-        insert("nazwisko");
-        insert("data");
-        insert("kot");
-        insert("Ala");
-        //end of test*/
-        //generate();
     }
 
     public List getPassword() {

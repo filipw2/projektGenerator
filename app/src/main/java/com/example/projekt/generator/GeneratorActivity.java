@@ -29,8 +29,8 @@ public class GeneratorActivity extends AppCompatActivity {
         TextView textView5 = (TextView) findViewById(R.id.textView5);
         textView.setText(message);
 
+        //getting data from generator and printing it
         pass=Generator.getInstance().getPassword();
-        //pass=gen.getPassword();
         String t= (String) pass.get(0);
         textView3.setText(t);
         t= (String) pass.get(1);
