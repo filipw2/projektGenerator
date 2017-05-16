@@ -18,12 +18,12 @@ public class Generator {
         return instance;
     }
 
-    private void generate(){
+    public void generate(){
         String generated;
         Random rn = new Random();
         for(int i=0; i<3; i++){
             //out of range exeption here randomly
-            int randomNum =  rn.nextInt(size - 0 + 1) + 0;
+            int randomNum =  rn.nextInt(size-1 - 0 + 1) + 0;
             generated= (String) data.get(randomNum);
             pass.add(generated);
         }
@@ -32,14 +32,14 @@ public class Generator {
     private Generator() {
         data = new ArrayList();
         pass = new ArrayList();
-        //test fragment here
+        /*test fragment here
         insert("imie");
         insert("nazwisko");
         insert("data");
         insert("kot");
         insert("Ala");
-        //end of test
-        generate();
+        //end of test*/
+        //generate();
     }
 
     public List getPassword() {
