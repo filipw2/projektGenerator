@@ -4,16 +4,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     Generator gen;
+    LinearLayout ll;
+    List<EditText> editTextList = new ArrayList<>();
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         gen=Generator.getInstance();
+        ll = (LinearLayout) findViewById(R.id.linearLayout);
+
+        Button b = (Button) findViewById(R.id.addButton);
+        b.setOnClickListener((View v) ->{
+            addField();
+        }
+        );
 
     }
 
@@ -22,22 +37,15 @@ public class MainActivity extends AppCompatActivity {
         //clearing generator fields
         gen.clear();
         //fetching data from user
-        String data;
-        EditText editText2 = (EditText) findViewById(R.id.editText2);
-        data = editText2.getText().toString();
-        gen.insert(data);
-        EditText editText3 = (EditText) findViewById(R.id.editText3);
-        data = editText3.getText().toString();
-        gen.insert(data);
-        EditText editText4 = (EditText) findViewById(R.id.editText4);
-        data = editText4.getText().toString();
-        gen.insert(data);
-        EditText editText5 = (EditText) findViewById(R.id.editText5);
-        data = editText5.getText().toString();
-        gen.insert(data);
-        EditText editText6 = (EditText) findViewById(R.id.editText6);
-        data = editText6.getText().toString();
-        gen.insert(data);
+
+
+
+        editTextList.stream()
+                .forEach(a -> insertData(a));
+
+
+
+
         //generating
         gen.generate();
         //creating new activity
@@ -49,4 +57,16 @@ public class MainActivity extends AppCompatActivity {
         //starting new activity with results
         startActivity(intent);
     }
+
+    private void insertData(EditText et){
+
+        gen.insert(et.getText().toString());
+    }
+
+    private void addField() {
+        EditText eT = new EditText(this);
+        editTextList.add(eT);
+        ll.addView(eT);
+    }
+
 }
