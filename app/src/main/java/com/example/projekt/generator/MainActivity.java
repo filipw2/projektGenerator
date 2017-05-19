@@ -17,10 +17,14 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout ll;
     List<EditText> editTextList = new ArrayList<EditText>();
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    int passwordLength;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         gen=Generator.getInstance();
         ll = (LinearLayout) findViewById(R.id.linearLayout);
@@ -41,16 +45,12 @@ public class MainActivity extends AppCompatActivity {
         //clearing generator fields
         gen.clear();
         //fetching data from user
-        int passwordLenght;
 
-        if(!editTextList.isEmpty()) {
-            for(EditText e : editTextList){
-                insertData(e);
-            }
 
+        if(setData()) {
 
             //generating
-            gen.generate(14);
+            gen.generate(passwordLength);
             //creating new activity
             Intent intent = new Intent(this, GeneratorActivity.class);
             //sending additional text info to new activity
@@ -60,6 +60,28 @@ public class MainActivity extends AppCompatActivity {
             //starting new activity with results
             startActivity(intent);
         }
+    }
+
+    private Boolean setData(){
+        if(!editTextList.isEmpty())
+            for(EditText e : editTextList){
+                insertData(e);
+            }
+            else
+                return Boolean.FALSE;
+
+        TextView tv =  (EditText) findViewById(R.id.passwordLenght);
+        try {
+
+            passwordLength = Integer.parseInt( tv.getText().toString());
+            if(passwordLength <1 || passwordLength >30)
+                return Boolean.FALSE;
+
+        }catch(NumberFormatException e){
+                return Boolean.FALSE;
+        }
+
+        return Boolean.TRUE;
     }
 
     private void insertData(EditText et){

@@ -33,9 +33,9 @@ public class GeneratorActivity extends AppCompatActivity {
         pass=Generator.getInstance().getPassword();
         String t= (String) pass.get(0);
         textView3.setText(t);
-        t= (String) pass.get(1);
-        textView4.setText(t);
-        t= (String) pass.get(2);
-        textView5.setText(t);
+       // t= (String) pass.get(1);
+       // textView4.setText(t);
+       // t= (String) pass.get(2);
+        //textView5.setText(t);
     }
 }

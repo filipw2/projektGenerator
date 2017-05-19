@@ -21,17 +21,23 @@ public class Generator {
         return instance;
     }
 
-    public void generate(int passwordLenght){
-        String generated;
+    public void generate(int passwordLength){
+        String generated="";
         //selecting random field from user data
+        String allData="";
 
-        for(int i=0; i<3; i++){
-            int randomNum =  rn.nextInt(size-1 - 0 + 1) + 0;
-            generated= (String) data.get(randomNum);
-            pass.add(generated);
+        for(int i=0;i<data.size();i++)
+        {
+            allData+=data.get(i).toString();
         }
 
+        for(int i=0; i<passwordLength; i++){
+            int r = rn.nextInt(allData.length());
+            generated+=allData.charAt(r);
 
+        }
+
+        pass.add(generated);
 
 
     }
