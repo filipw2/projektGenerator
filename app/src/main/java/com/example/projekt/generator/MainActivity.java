@@ -25,12 +25,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
-        gen=Generator.getInstance();
+        gen = Generator.getInstance();
         ll = (LinearLayout) findViewById(R.id.linearLayout);
 
         Button b = (Button) findViewById(R.id.addButton);
-        b.setOnClickListener(new Button.OnClickListener(){
+        b.setOnClickListener(new Button.OnClickListener() {
                                  @Override
                                  public void onClick(View v) {
                                      addField();
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         //fetching data from user
 
 
-        if(setData()) {
+        if (setData()) {
 
             //generating
             gen.generate(passwordLength);
@@ -62,29 +61,29 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private Boolean setData(){
-        if(!editTextList.isEmpty())
-            for(EditText e : editTextList){
+    private Boolean setData() {
+        if (!editTextList.isEmpty())
+            for (EditText e : editTextList) {
                 insertData(e);
             }
-            else
-                return Boolean.FALSE;
+        else
+            return Boolean.FALSE;
 
-        TextView tv =  (EditText) findViewById(R.id.passwordLenght);
+        TextView tv = (EditText) findViewById(R.id.passwordLenght);
         try {
 
-            passwordLength = Integer.parseInt( tv.getText().toString());
-            if(passwordLength <1 || passwordLength >30)
+            passwordLength = Integer.parseInt(tv.getText().toString());
+            if (passwordLength < 1 || passwordLength > 30)
                 return Boolean.FALSE;
 
-        }catch(NumberFormatException e){
-                return Boolean.FALSE;
+        } catch (NumberFormatException e) {
+            return Boolean.FALSE;
         }
 
         return Boolean.TRUE;
     }
 
-    private void insertData(EditText et){
+    private void insertData(EditText et) {
 
         gen.insert(et.getText().toString());
     }

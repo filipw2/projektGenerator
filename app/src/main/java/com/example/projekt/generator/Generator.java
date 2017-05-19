@@ -11,6 +11,7 @@ public class Generator {
     private List data; //user data
     private List pass; //generated passwords
     private Random rn;
+    private String specialChars;
 
     public static Generator instance;
 
@@ -32,8 +33,16 @@ public class Generator {
         }
 
         for(int i=0; i<passwordLength; i++){
+
+            int cas = rn.nextInt(100);
+            int sc = rn.nextInt(specialChars.length());
             int r = rn.nextInt(allData.length());
-            generated+=allData.charAt(r);
+            if(cas >90)
+                generated+=Character.toUpperCase(allData.charAt(r));
+            else if(cas<20)
+                generated+=specialChars.charAt(sc);
+            else
+                generated+=allData.charAt(r);
 
         }
 
@@ -46,6 +55,7 @@ public class Generator {
         rn = new Random(new Date().getTime());
         data = new ArrayList();
         pass = new ArrayList();
+        specialChars="!@#$%^&*()";
     }
 
     public List getPassword() {
