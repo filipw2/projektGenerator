@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     Generator gen;
     LinearLayout ll;
-    List<EditText> editTextList = new ArrayList<>();
+    List<EditText> editTextList = new ArrayList<EditText>();
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +26,12 @@ public class MainActivity extends AppCompatActivity {
         ll = (LinearLayout) findViewById(R.id.linearLayout);
 
         Button b = (Button) findViewById(R.id.addButton);
-        b.setOnClickListener((View v) ->{
-            addField();
-        }
+        b.setOnClickListener(new Button.OnClickListener(){
+                                 @Override
+                                 public void onClick(View v) {
+                                     addField();
+                                 }
+                             }
         );
 
     }
@@ -37,25 +41,25 @@ public class MainActivity extends AppCompatActivity {
         //clearing generator fields
         gen.clear();
         //fetching data from user
+        int passwordLenght;
+
+        if(!editTextList.isEmpty()) {
+            for(EditText e : editTextList){
+                insertData(e);
+            }
 
 
-
-        editTextList.stream()
-                .forEach(a -> insertData(a));
-
-
-
-
-        //generating
-        gen.generate();
-        //creating new activity
-        Intent intent = new Intent(this, GeneratorActivity.class);
-        //sending additional text info to new activity
-        EditText editText = (EditText) findViewById(R.id.editText);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        //starting new activity with results
-        startActivity(intent);
+            //generating
+            gen.generate(14);
+            //creating new activity
+            Intent intent = new Intent(this, GeneratorActivity.class);
+            //sending additional text info to new activity
+            EditText editText = (EditText) findViewById(R.id.editText);
+            String message = editText.getText().toString();
+            intent.putExtra(EXTRA_MESSAGE, message);
+            //starting new activity with results
+            startActivity(intent);
+        }
     }
 
     private void insertData(EditText et){
