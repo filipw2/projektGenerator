@@ -7,7 +7,6 @@ import java.util.Random;
 
 //Singleton
 public class Generator {
-    int size=0; //count of used data fields
     private List data; //user data
     private List pass; //generated passwords
     private Random rn;
@@ -24,14 +23,16 @@ public class Generator {
 
     public void generate(int passwordLength){
         String generated="";
-        //selecting random field from user data
         String allData="";
 
-        for(int i=0;i<data.size();i++)
-        {
-            allData+=data.get(i).toString();
+        //selecting all fields from user data and adding it to allData in random order
+        while (data.size()>0) {
+            int num = rn.nextInt(data.size()-1 - 0 + 1) + 0; //selecting
+            allData+=data.get(num).toString(); //adding
+            data.remove(num); //deleting data from structure to avoid repeats
         }
 
+        /*
         for(int i=0; i<passwordLength; i++){
 
             int cas = rn.nextInt(100);
@@ -43,8 +44,36 @@ public class Generator {
                 generated+=specialChars.charAt(sc);
             else
                 generated+=allData.charAt(r);
-
         }
+        */
+
+        //my test algorithm
+        //spaces removal
+        allData = allData.replaceAll("\\s+","");
+        //password generation
+        while(generated.length()<passwordLength) {
+            //beginning of the string
+            int start = rn.nextInt(allData.length() - 1 - 0 + 1) + 0;
+            //check if data length from beginning point is enough to fill preferred length
+            if (start + passwordLength < allData.length()) {
+                for (int k = start; k <= start + passwordLength; k++) {
+                    generated += allData.charAt(k);
+                }
+            } else {
+                //if not enough filling as much as possible and selecting beginning point again
+                for (int k = start; k < allData.length(); k++) {
+                    generated += allData.charAt(k);
+                    //if length is already ok
+                    if(generated.length()==passwordLength)
+                        break;
+                }
+            }
+        }
+        //special chars section here
+        //randomly replace 'a' to '@' 's' to '$'
+        //will be done later
+
+
 
         pass.add(generated);
 
@@ -64,12 +93,6 @@ public class Generator {
 
     public void insert(String s){
         data.add(s);
-        size++;
-    }
-
-    public void remove(int n){
-        data.remove(n);
-        size--;
     }
 
     public void clear(){

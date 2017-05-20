@@ -25,8 +25,8 @@ public class GeneratorActivity extends AppCompatActivity {
         // Capture the layout's TextView and set the string as its text
         TextView textView = (TextView) findViewById(R.id.textView);
         TextView textView3 = (TextView) findViewById(R.id.textView3);
-        TextView textView4 = (TextView) findViewById(R.id.textView4);
-        TextView textView5 = (TextView) findViewById(R.id.textView5);
+        //TextView textView4 = (TextView) findViewById(R.id.textView4);
+        //TextView textView5 = (TextView) findViewById(R.id.textView5);
         textView.setText(message);
 
         //getting data from generator and printing it
