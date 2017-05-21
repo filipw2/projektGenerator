@@ -15,6 +15,12 @@
         />
 
     <Button
+        android:id="@+id/preferences"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Opcje" />
+
+    <Button
         android:id="@+id/btnActTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

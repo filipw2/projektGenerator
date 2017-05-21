@@ -28,6 +28,16 @@ public class MainActivity extends AppCompatActivity {
         gen = Generator.getInstance();
         ll = (LinearLayout) findViewById(R.id.linearLayout);
 
+        Button prefButton = (Button) findViewById(R.id.preferences);
+        prefButton.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(v.getContext(),PreferencesActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
         Button b = (Button) findViewById(R.id.addButton);
         b.setOnClickListener(new Button.OnClickListener() {
                                  @Override
