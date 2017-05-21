@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.lang.String;
 
 //Singleton
 public class Generator {
@@ -21,6 +22,43 @@ public class Generator {
         return instance;
     }
 
+    private String specchar(String generated, String c){
+        int counter=0;
+        int num[]=new int[50];
+        int i=0;
+        if(generated.toLowerCase().contains(c)) {
+            num[i] = generated.indexOf(c);
+            i++;
+            counter++;
+            /*
+            //this section is for replacing chars if it is more then one symbol
+            //but currently it doesnt work
+            while (generated.toLowerCase().substring(num[i-1]).contains(c)) {
+                num[i] = generated.indexOf(c);
+                i++;
+                counter++;
+            }
+            */
+            char[] generatedChars = generated.toCharArray();
+            int sel=0;
+            if (counter > 1) {
+                sel = rn.nextInt(counter - 1 - 0 + 1) + 0;
+            }
+            switch (c) {
+                case "a":
+                    generatedChars[num[sel]] = '@';
+                    break;
+                case "s":
+                    generatedChars[num[sel]] = '$';
+                    break;
+            }
+            generated=String.valueOf(generatedChars);
+        }
+        return generated;
+    }
+
+
+
     public void generate(int passwordLength){
         String generated="";
         String allData="";
@@ -31,21 +69,6 @@ public class Generator {
             allData+=data.get(num).toString(); //adding
             data.remove(num); //deleting data from structure to avoid repeats
         }
-
-        /*
-        for(int i=0; i<passwordLength; i++){
-
-            int cas = rn.nextInt(100);
-            int sc = rn.nextInt(specialChars.length());
-            int r = rn.nextInt(allData.length());
-            if(cas >90)
-                generated+=Character.toUpperCase(allData.charAt(r));
-            else if(cas<20)
-                generated+=specialChars.charAt(sc);
-            else
-                generated+=allData.charAt(r);
-        }
-        */
 
         //my test algorithm
         //spaces removal
@@ -69,15 +92,12 @@ public class Generator {
                 }
             }
         }
-        //special chars section here
-        //randomly replace 'a' to '@' 's' to '$'
-        //will be done later
 
-
+        generated=specchar(generated, "a");
+        generated=specchar(generated, "s");
 
         pass.add(generated);
-
-
+        
     }
 
     private Generator() {
