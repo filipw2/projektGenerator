@@ -6,39 +6,46 @@
     android:layout_height="fill_parent"
     android:id="@+id/linearLayout">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"></include>
+
     <EditText
-        android:id="@+id/passwordLenght"
+        android:id="@+id/passwordLength"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number"
-        />
+        android:inputType="number"/>
 
-    <Button
-        android:id="@+id/preferences"
+    <LinearLayout
+        android:id="@+id/field_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Opcje" />
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnActTwo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="sendMessage"
-        android:text="Go to Activity Two"></Button>
+    </LinearLayout>
 
-    <EditText
-        android:id="@+id/editText"
+
+    <LinearLayout
+        android:id="@+id/button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Put text to send here" />
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:orientation="vertical">
 
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="+" />
 
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="+" />
+        <Button
+            android:id="@+id/btnActTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="sendMessage"
+            android:text="Generuj"></Button>
+    </LinearLayout>
+
 </LinearLayout>

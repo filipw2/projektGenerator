@@ -19,19 +19,8 @@ public class BootReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)) {
 
-            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            intent = new Intent(context, WakefulReceiver.class);
-            PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(System.currentTimeMillis());
-            //// TODO: use calendar.add(Calendar.SECOND,MINUTE,HOUR, int);
-            //calendar.add(Calendar.SECOND, 10);
-
-            //ALWAYS recompute the calendar after using add, set, roll
-            Date date = calendar.getTime();
-
-           // alarmManager.setExact(AlarmManager.RTC_WAKEUP, date.getTime(), alarmIntent);
+            WakefulReceiver wakefulReceiver=new WakefulReceiver();
+            wakefulReceiver.setAlarm(context);
         }
     }
 }

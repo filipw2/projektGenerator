@@ -14,8 +14,6 @@ import android.util.Log;
 import com.example.projekt.generator.MainActivity;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * Created by Filip on 2017-05-22.
@@ -28,7 +26,6 @@ public class WakefulReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         setNotification(context);
-       // WakefulReceiver.completeWakefulIntent(intent);
     }
 
     public void setAlarm(Context context){
@@ -94,7 +91,7 @@ public class WakefulReceiver extends BroadcastReceiver {
         PendingIntent notificIntent = PendingIntent.getActivity(context, 0,
                 new Intent(context, MainActivity.class), 0);
 
-        // Builds a notification
+
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(icon)
@@ -103,7 +100,6 @@ public class WakefulReceiver extends BroadcastReceiver {
 
         // Defines the Intent to fire when the notification is clicked
         mBuilder.setContentIntent(notificIntent);
-
 
         // Auto cancels the notification when clicked on in the task bar
         mBuilder.setAutoCancel(true);

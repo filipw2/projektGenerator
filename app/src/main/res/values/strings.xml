@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Generator</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Opcje</string>
     <string name="title_activity_generator">GeneratorActivity</string>
+    <string name="generator">generator</string>
+    <string name="exit">wyjście</string>
 </resources>
