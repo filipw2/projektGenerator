@@ -1,5 +1,6 @@
 package com.example.projekt.generator;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import receiver.WakefulReceiver;
+
 public class MainActivity extends AppCompatActivity {
     Generator gen;
     LinearLayout ll;
@@ -23,17 +26,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        WakefulReceiver wr = new WakefulReceiver();
+        wr.setAlarm(this);
+        //setAlarm();
         gen = Generator.getInstance();
         ll = (LinearLayout) findViewById(R.id.linearLayout);
 
         Button prefButton = (Button) findViewById(R.id.preferences);
-        prefButton.setOnClickListener(new Button.OnClickListener(){
+        prefButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(v.getContext(),PreferencesActivity.class);
+                Intent intent = new Intent(v.getContext(), PreferencesActivity.class);
                 startActivity(intent);
+
 
             }
         });
@@ -46,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                                  }
                              }
         );
+
 
     }
 
@@ -103,5 +109,7 @@ public class MainActivity extends AppCompatActivity {
         editTextList.add(eT);
         ll.addView(eT);
     }
+
+
 
 }
