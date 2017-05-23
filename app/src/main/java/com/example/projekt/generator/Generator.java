@@ -22,33 +22,26 @@ public class Generator {
         return instance;
     }
 
-    private String specchar(String generated, String c){
+    private String specchar(String generated, char c){
         int counter=0;
         int num[]=new int[50];
-        int i=0;
-        if(generated.toLowerCase().contains(c)) {
-            num[i] = generated.indexOf(c);
-            i++;
-            counter++;
-            /*
-            //this section is for replacing chars if it is more then one symbol
-            //but currently it doesnt work
-            while (generated.toLowerCase().substring(num[i-1]).contains(c)) {
-                num[i] = generated.indexOf(c);
-                i++;
+        char[] generatedChars = generated.toCharArray();
+        for(int i=0; i<generatedChars.length; i++){
+            if (generatedChars[i]==c){
+                num[counter]=i;
                 counter++;
             }
-            */
-            char[] generatedChars = generated.toCharArray();
+        }
+        if(counter>0) {
             int sel=0;
             if (counter > 1) {
                 sel = rn.nextInt(counter - 1 - 0 + 1) + 0;
             }
             switch (c) {
-                case "a":
+                case 'a':
                     generatedChars[num[sel]] = '@';
                     break;
-                case "s":
+                case 's':
                     generatedChars[num[sel]] = '$';
                     break;
             }
@@ -77,10 +70,13 @@ public class Generator {
         while(generated.length()<passwordLength) {
             //beginning of the string
             int start = rn.nextInt(allData.length() - 1 - 0 + 1) + 0;
+            int passLen = rn.nextInt(7 - 3 + 1) + 3;
             //check if data length from beginning point is enough to fill preferred length
-            if (start + passwordLength < allData.length()) {
-                for (int k = start; k <= start + passwordLength; k++) {
+            if (start + passLen < allData.length()) {
+                for (int k = start; k <= start + passLen; k++) {
                     generated += allData.charAt(k);
+                    if(generated.length()==passwordLength)
+                        break;
                 }
             } else {
                 //if not enough filling as much as possible and selecting beginning point again
@@ -93,11 +89,11 @@ public class Generator {
             }
         }
 
-        generated=specchar(generated, "a");
-        generated=specchar(generated, "s");
+        generated=specchar(generated, 'a');
+        generated=specchar(generated, 's');
 
         pass.add(generated);
-        
+
     }
 
     private Generator() {
