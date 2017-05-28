@@ -7,13 +7,20 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.example.projekt.generator.MainActivity;
+import com.example.projekt.generator.PreferencesFragment;
 
+import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Date;
+
+import static com.example.projekt.generator.R.string.generator;
 
 /**
  * Created by Filip on 2017-05-22.
@@ -22,23 +29,45 @@ import java.util.Calendar;
 public class WakefulReceiver extends BroadcastReceiver {
 
     private AlarmManager mAlarmManager;
+    private SharedPreferences sp;
+    private Boolean enable;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         setNotification(context);
+
+            setAlarm(context);
     }
 
     public void setAlarm(Context context){
-        Calendar myAlarmDate = Calendar.getInstance();
+        sp  = PreferenceManager.getDefaultSharedPreferences(context);
+        enable=true;
+
+        try {
+            enable=sp.getBoolean("pref_enable", true);
+        }catch(Exception e){
+            Log.e("pref",e.toString());
+        }
+        if(!enable)
+            return;
+
+        Date currentDate = new Date();
+        sp  = PreferenceManager.getDefaultSharedPreferences(context);
+        // convert date to calendar
+        Calendar c = Calendar.getInstance();
+        c.setTime(currentDate);
 
 
-        myAlarmDate.set(Calendar.YEAR, 2017);
-        myAlarmDate.set(Calendar.MONTH, 4); //0-11
-        myAlarmDate.set(Calendar.DAY_OF_MONTH, 2);
-        myAlarmDate.set(Calendar.HOUR_OF_DAY, 11);
-        myAlarmDate.set(Calendar.MINUTE, 20);
-        myAlarmDate.set(Calendar.SECOND, 0);
-        myAlarmDate.set(Calendar.MILLISECOND, 0);
+        int days = 30;//
+
+        try {
+            days = Integer.parseInt(sp.getString("days","30"));
+
+        }catch (Exception e){
+            Log.e("pref",e.toString());
+        }
+
+        c.add(Calendar.DAY_OF_YEAR,days);
 
         // Define our intention of executing AlertReceiver
         Intent alertIntent = new Intent(context, WakefulReceiver.class);
@@ -50,9 +79,11 @@ public class WakefulReceiver extends BroadcastReceiver {
         // set() schedules an alarm to trigger
         // Trigger for alertIntent to fire in 5 seconds
         // FLAG_UPDATE_CURRENT : Update the Intent if active
-        alarmManager.set(AlarmManager.RTC_WAKEUP, myAlarmDate.getTimeInMillis(),
+        alarmManager.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(),
                 PendingIntent.getBroadcast(context, 1, alertIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT));
+
+
 
         ComponentName receiver = new ComponentName(context, receiver.BootReceiver.class);
         PackageManager pm = context.getPackageManager();

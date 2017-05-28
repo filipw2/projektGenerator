@@ -3,6 +3,7 @@ package com.example.projekt.generator;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     Generator gen;
     LinearLayout ll;
     List<EditText> editTextList = new ArrayList<EditText>();
+    private WakefulReceiver wr;
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     int passwordLength;
 
@@ -32,11 +34,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
-        WakefulReceiver wr = new WakefulReceiver();
-        wr.setAlarm(this);
+        wr = new WakefulReceiver();
+
 
         gen = Generator.getInstance();
         ll = (LinearLayout) findViewById(R.id.field_container);
@@ -90,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
             //generating
             gen.generate(passwordLength);
+            wr.setAlarm(this);
             //creating new activity
             Intent intent = new Intent(this, GeneratorActivity.class);
             //sending additional text info to new activity
