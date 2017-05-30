@@ -25,17 +25,17 @@ public class GeneratorActivity extends AppCompatActivity {
         // Capture the layout's TextView and set the string as its text
         TextView textView = (TextView) findViewById(R.id.textView);
         TextView textView3 = (TextView) findViewById(R.id.textView3);
-        //TextView textView4 = (TextView) findViewById(R.id.textView4);
-        //TextView textView5 = (TextView) findViewById(R.id.textView5);
+        TextView textView4 = (TextView) findViewById(R.id.textView4);
+        TextView textView5 = (TextView) findViewById(R.id.textView5);
         textView.setText(message);
 
         //getting data from generator and printing it
         pass=Generator.getInstance().getPassword();
         String t= (String) pass.get(0);
         textView3.setText(t);
-       // t= (String) pass.get(1);
-       // textView4.setText(t);
-       // t= (String) pass.get(2);
-        //textView5.setText(t);
+        t= (String) pass.get(1);
+        textView4.setText(t);
+        t= (String) pass.get(2);
+        textView5.setText(t);
     }
 }

@@ -9,9 +9,10 @@ import java.lang.String;
 //Singleton
 public class Generator {
     private List data; //user data
-    private List pass; //generated passwords
+    private static List pass; //generated passwords
     private Random rn;
     private String specialChars;
+    private String allData;
 
     public static Generator instance;
 
@@ -53,51 +54,67 @@ public class Generator {
 
 
     public void generate(int passwordLength){
-        String generated="";
-        String allData="";
+        int c=0;
+        //3 passwords generation
+        while (c<3) {
+            String generated = "";
+            //selecting all fields from user data and adding it to allData in random order
+            while (data.size() > 0) {
+                int num = rn.nextInt(data.size() - 1 - 0 + 1) + 0; //selecting
+                allData += data.get(num).toString(); //adding
+                data.remove(num); //deleting data from structure to avoid repeats
+            }
 
-        //selecting all fields from user data and adding it to allData in random order
-        while (data.size()>0) {
-            int num = rn.nextInt(data.size()-1 - 0 + 1) + 0; //selecting
-            allData+=data.get(num).toString(); //adding
-            data.remove(num); //deleting data from structure to avoid repeats
-        }
-
-        //my test algorithm
-        //spaces removal
-        allData = allData.replaceAll("\\s+","");
-        //password generation
-        while(generated.length()<passwordLength) {
-            //beginning of the string
-            int start = rn.nextInt(allData.length() - 1 - 0 + 1) + 0;
-            int passLen = rn.nextInt(7 - 3 + 1) + 3;
-            //check if data length from beginning point is enough to fill preferred length
-            if (start + passLen < allData.length()) {
-                for (int k = start; k <= start + passLen; k++) {
-                    generated += allData.charAt(k);
-                    if(generated.length()==passwordLength)
-                        break;
-                }
-            } else {
-                //if not enough filling as much as possible and selecting beginning point again
-                for (int k = start; k < allData.length(); k++) {
-                    generated += allData.charAt(k);
-                    //if length is already ok
-                    if(generated.length()==passwordLength)
-                        break;
+            //my test algorithm
+            //spaces removal
+            allData = allData.replaceAll("\\s+", "");
+            //password generation
+            while (generated.length() < passwordLength) {
+                //beginning of the string
+                int start = rn.nextInt(allData.length() - 1 - 0 + 1) + 0;
+                int passLen = rn.nextInt(7 - 3 + 1) + 3;
+                //check if data length from beginning point is enough to fill preferred length
+                if (start + passLen < allData.length()) {
+                    for (int k = start; k <= start + passLen; k++) {
+                        generated += allData.charAt(k);
+                        if (generated.length() == passwordLength)
+                            break;
+                    }
+                } else {
+                    //if not enough filling as much as possible and selecting beginning point again
+                    for (int k = start; k < allData.length(); k++) {
+                        generated += allData.charAt(k);
+                        //if length is already ok
+                        if (generated.length() == passwordLength)
+                            break;
+                    }
                 }
             }
+
+            generated = specchar(generated, 'a');
+            generated = specchar(generated, 's');
+
+            //checking for duplicates
+            if(c==0)
+            {
+                pass.add(generated);
+                c++;
+            }
+            else if (c == 1 && pass.get(0) != generated) {
+                    pass.add(generated);
+                    c++;
+                }
+            else if (c == 2 && pass.get(0) != generated && pass.get(1) != generated) {
+                    pass.add(generated);
+                    c++;
+                }
         }
-
-        generated=specchar(generated, 'a');
-        generated=specchar(generated, 's');
-
-        pass.add(generated);
 
     }
 
     private Generator() {
         rn = new Random(new Date().getTime());
+        allData="";
         data = new ArrayList();
         pass = new ArrayList();
         specialChars="!@#$%^&*()";
@@ -113,5 +130,9 @@ public class Generator {
 
     public void clear(){
         pass.clear();
+    }
+
+    public void clearData(){
+        allData="";
     }
 }
