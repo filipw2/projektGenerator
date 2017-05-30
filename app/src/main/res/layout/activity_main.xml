@@ -15,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number"/>
+        android:hint="@string/podaj_d_ugo_has_a"
+        android:inputType="number" />
 
     <LinearLayout
         android:id="@+id/field_container"

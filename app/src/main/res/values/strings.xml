@@ -2,6 +2,7 @@
     <string name="app_name">Generator</string>
     <string name="action_settings">Opcje</string>
     <string name="title_activity_generator">GeneratorActivity</string>
-    <string name="generator">generator</string>
-    <string name="exit">wyjście</string>
+    <string name="generator">Generator</string>
+    <string name="exit">Wyjście</string>
+    <string name="podaj_d_ugo_has_a">Podaj długość hasła</string>
 </resources>
