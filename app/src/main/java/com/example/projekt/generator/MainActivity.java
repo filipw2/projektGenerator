@@ -145,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
         EditText eT = new EditText(this);
         TableRow.LayoutParams params = new TableRow.LayoutParams(Toolbar.LayoutParams.MATCH_PARENT, Toolbar.LayoutParams.WRAP_CONTENT,1.0f);
         eT.setLayoutParams(params);
+        eT.setHint(R.string.input_placeholder);
         editTextList.add(eT);
 
         ll.addView(eT);

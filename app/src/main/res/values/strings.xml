@@ -5,4 +5,5 @@
     <string name="generator">Generator</string>
     <string name="exit">Wyjście</string>
     <string name="podaj_d_ugo_has_a">Podaj długość hasła</string>
+    <string name="input_placeholder">Wprowadź dane</string>
 </resources>
