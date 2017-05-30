@@ -23,6 +23,19 @@ public class Generator {
         return instance;
     }
 
+    private String upper(String generated){
+        char[] generatedChars = generated.toCharArray();
+        int upperLetters=rn.nextInt(generatedChars.length-2 - 1 + 1) + 1;
+        int ch;
+        for (int i=0; i<upperLetters; i++)
+        {
+            ch=rn.nextInt(generatedChars.length-1 - 0 + 1) + 0;
+            generatedChars[ch]=Character.toUpperCase(generatedChars[ch]);
+        }
+        generated=String.valueOf(generatedChars);
+        return generated;
+    }
+
     private String specchar(String generated, char c){
         int counter=0;
         int num[]=new int[50];
@@ -91,8 +104,10 @@ public class Generator {
                 }
             }
 
+            //should add settings for this later
             generated = specchar(generated, 'a');
             generated = specchar(generated, 's');
+            generated = upper(generated);
 
             //checking for duplicates
             if(c==0)
