@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         ll = (LinearLayout) findViewById(R.id.field_container);
 
 
-
         Button b = (Button) findViewById(R.id.addButton);
         b.setOnClickListener(new Button.OnClickListener() {
                                  @Override
@@ -56,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                              }
         );
 
+        initFields();
 
     }
 
@@ -97,23 +96,26 @@ public class MainActivity extends AppCompatActivity {
         //fetching data from user
 
 
-        if (setData()) {
+        try {
+            if (setData()) {
 
-            //generating
-            gen.generate(passwordLength);
-            gen.clearData();
-            wr.setAlarm(this);
-            //creating new activity
-            Intent intent = new Intent(this, GeneratorActivity.class);
-            //sending additional text info to new activity
-            //EditText editText = (EditText) findViewById(R.id.editText);
-            //String message = editText.getText().toString();
-            //intent.putExtra(EXTRA_MESSAGE, message);
-            //starting new activity with results
-            startActivity(intent);
+                //generating
+                gen.generate(passwordLength);
+                gen.clearData();
+                wr.setAlarm(this);
+                //creating new activity
+                Intent intent = new Intent(this, GeneratorActivity.class);
+
+                //starting new activity with results
+                startActivity(intent);
+            }
+        } catch (Exception e) {
+
         }
     }
 
+
+    //TODO check if fields contain data
     private Boolean setData() {
         if (!editTextList.isEmpty())
             for (EditText e : editTextList) {
@@ -141,16 +143,29 @@ public class MainActivity extends AppCompatActivity {
         gen.insert(et.getText().toString());
     }
 
+
+    private void initFields() {
+        addField("Imię");
+        addField("Nazwisko");
+        addField("Miejscowość");
+    }
+
     private void addField() {
         EditText eT = new EditText(this);
-        TableRow.LayoutParams params = new TableRow.LayoutParams(Toolbar.LayoutParams.MATCH_PARENT, Toolbar.LayoutParams.WRAP_CONTENT,1.0f);
+        TableRow.LayoutParams params = new TableRow.LayoutParams(Toolbar.LayoutParams.MATCH_PARENT, Toolbar.LayoutParams.WRAP_CONTENT, 1.0f);
         eT.setLayoutParams(params);
         eT.setHint(R.string.input_placeholder);
+        eT.setText("");
         editTextList.add(eT);
 
         ll.addView(eT);
     }
 
+
+    private void addField(String text) {
+        addField();
+        editTextList.get(editTextList.size() - 1).setHint(text);
+    }
 
 
 }
