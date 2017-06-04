@@ -156,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         eT.setLayoutParams(params);
         eT.setHint(R.string.input_placeholder);
         eT.setText("");
+        eT.setId(View.generateViewId());
         editTextList.add(eT);
 
         ll.addView(eT);
