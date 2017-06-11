@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,11 +30,13 @@ import receiver.WakefulReceiver;
 public class MainActivity extends AppCompatActivity {
     Generator gen;
     LinearLayout ll;
+    LinearLayout myLayout;
     List<EditText> editTextList = new ArrayList<EditText>();
     private WakefulReceiver wr;
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     int passwordLength;
     boolean ignore=true;
+    boolean settingsVisible=false;
     TextView upp;
 
     @Override
@@ -43,6 +46,17 @@ public class MainActivity extends AppCompatActivity {
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
 
+        Button showhide = (Button) findViewById(R.id.btnActThree);
+        showhide.setOnClickListener(new Button.OnClickListener() {
+                                 @Override
+                                 public void onClick(View v) {
+                                     showHide();
+                                 }
+                             }
+        );
+
+        myLayout = (LinearLayout) findViewById(R.id.settings_container);
+        myLayout.setVisibility(LinearLayout.GONE);
 
         final TextView tv = (EditText) findViewById(R.id.passwordLength);
         tv.setFocusable(false);
@@ -183,7 +197,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //TODO check if fields contain data
+    //TODO add scroll if there are too many fields
+
     private Boolean setData() {
         int c=0;
         if (!editTextList.isEmpty())
@@ -263,6 +278,17 @@ public class MainActivity extends AppCompatActivity {
         ll.addView(eT);
     }
 
+    private void showHide() {
+        myLayout = (LinearLayout) findViewById(R.id.settings_container);
+        if(settingsVisible) {
+            myLayout.setVisibility(LinearLayout.GONE);
+            settingsVisible=false;
+        }
+        else {
+            myLayout.setVisibility(LinearLayout.VISIBLE);
+            settingsVisible=true;
+        }
+    }
 
     private void addField(String text) {
         addField();

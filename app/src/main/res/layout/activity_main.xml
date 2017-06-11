@@ -6,9 +6,24 @@
     android:layout_height="fill_parent"
     android:id="@+id/linearLayout">
 
+
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"></include>
+
+    <Button
+        android:id="@+id/btnActThree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="sendMessage"
+        android:text="@string/options"></Button>
+
+    <LinearLayout
+        android:id="@+id/settings_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
@@ -70,7 +85,7 @@
         android:layout_height="wrap_content"
         android:checked="true"
         android:text="@string/ignore" />
-
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/field_container"

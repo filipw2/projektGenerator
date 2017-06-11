@@ -15,5 +15,6 @@
     <string name="name">Imię</string>
     <string name="surname">Nazwisko</string>
     <string name="location">Mejscowość</string>
+    <string name="options">Ustawienia generacji</string>
     <string name="ignore">Ignorować wielkość liter wprowadzonych przez użytkownika</string>
 </resources>
