@@ -11,6 +11,7 @@
     <string name="toofew">Musisz wypełnić co najmniej 3 pola</string>
     <string name="length">Podaj długość hasła</string>
     <string name="generate">Generuj</string>
+    <string name="generater">Generuj ponownie</string>
     <string name="input_placeholder">Wprowadź dane</string>
     <string name="name">Imię</string>
     <string name="surname">Nazwisko</string>
@@ -18,4 +19,6 @@
     <string name="options">Ustawienia generacji</string>
     <string name="ignore">Ignorować wielkość liter wprowadzonych przez użytkownika</string>
     <string name="spec">Używać symboli specjalnych</string>
+    <string name="success">Hasła zostały wygenerowane</string>
+    <string name="returner">Powrót</string>
 </resources>

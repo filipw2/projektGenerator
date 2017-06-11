@@ -17,6 +17,7 @@ public class Generator {
     private int upperCount;
     private boolean ignore=true;
     private boolean specCase=true;
+    private int passLen;
 
     public static Generator instance;
 
@@ -86,6 +87,7 @@ public class Generator {
 
 
     public void generate(int passwordLength){
+        passLen=passwordLength;
         int c=0;
         //3 passwords generation
         while (c<3) {
@@ -184,4 +186,6 @@ public class Generator {
     }
 
     public void setUpper(int i, boolean j, boolean k){upperCount=i; ignore=j; specCase=k;}
+
+    public int getPassLen(){return passLen;}
 }

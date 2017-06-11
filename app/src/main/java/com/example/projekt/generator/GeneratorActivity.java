@@ -1,41 +1,73 @@
 package com.example.projekt.generator;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.List;
 
 public class GeneratorActivity extends AppCompatActivity {
-    List pass;
+    private EditText pass1;
+    private EditText pass2;
+    private EditText pass3;
+    private List pass;
+    @Override
+    public void onBackPressed() {
+        Generator.getInstance().clearData();
+        super.onBackPressed();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generator);
 
-        // Get the Intent that started this activity and extract the string
-        Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        Button reg = (Button) findViewById(R.id.btnR);
+        reg.setOnClickListener(new Button.OnClickListener() {
+                                 @Override
+                                 public void onClick(View v) {
+                                     regenerate();
+                                 }
+                             }
+        );
+
+        Button ret = (Button) findViewById(R.id.btnRet);
+        ret.setOnClickListener(new Button.OnClickListener() {
+                                 @Override
+                                 public void onClick(View v) {
+                                     onBackPressed();
+                                 }
+                             }
+        );
 
         // Capture the layout's TextView and set the string as its text
-        TextView textView = (TextView) findViewById(R.id.textView);
-        TextView textView3 = (TextView) findViewById(R.id.textView3);
-        TextView textView4 = (TextView) findViewById(R.id.textView4);
-        TextView textView5 = (TextView) findViewById(R.id.textView5);
-        textView.setText(message);
+        pass1 = (EditText) findViewById(R.id.pass1);
+        pass1.setKeyListener(null);
+        pass2 = (EditText) findViewById(R.id.pass2);
+        pass2.setKeyListener(null);
+        pass3 = (EditText) findViewById(R.id.pass3);
+        pass3.setKeyListener(null);
 
         //getting data from generator and printing it
         pass=Generator.getInstance().getPassword();
         String t= (String) pass.get(0);
-        textView3.setText(t);
+        pass1.setText(t);
         t= (String) pass.get(1);
-        textView4.setText(t);
+        pass2.setText(t);
         t= (String) pass.get(2);
-        textView5.setText(t);
+        pass3.setText(t);
+    }
+
+    private void regenerate(){
+        Generator.getInstance().clear();
+        Generator.getInstance().generate(Generator.getInstance().getPassLen());
+        pass=Generator.getInstance().getPassword();
+        String t= (String) pass.get(0);
+        pass1.setText(t);
+        t= (String) pass.get(1);
+        pass2.setText(t);
+        t= (String) pass.get(2);
+        pass3.setText(t);
     }
 }

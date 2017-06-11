@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //generating
                 gen.generate(passwordLength);
-                gen.clearData();
+                //gen.clearData();
                 wr.setAlarm(this);
                 //creating new activity
                 Intent intent = new Intent(this, GeneratorActivity.class);
