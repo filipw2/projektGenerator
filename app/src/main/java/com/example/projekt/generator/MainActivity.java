@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private WakefulReceiver wr;
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     int passwordLength;
+    boolean ignore=true;
+    TextView upp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
+
+
         final TextView tv = (EditText) findViewById(R.id.passwordLength);
         tv.setFocusable(false);
         tv.setEnabled(false);
@@ -47,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         tv.setKeyListener(null);
         tv.setBackgroundColor(Color.TRANSPARENT);
 
-        final TextView upp = (EditText) findViewById(R.id.upper);
+        upp = (EditText) findViewById(R.id.upper);
         upp.setFocusable(false);
         upp.setEnabled(false);
         upp.setText("0");
@@ -78,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 upp.setText(String.valueOf(progress));
-                gen.setUpper(Integer.parseInt(upp.getText().toString()));
             }
 
             @Override
@@ -151,7 +155,14 @@ public class MainActivity extends AppCompatActivity {
         //clearing generator fields
         gen.clear();
         //fetching data from user
-
+        CheckBox cb = (CheckBox) findViewById(R.id.checkBox);
+        if (cb.isChecked()) {
+            ignore=true;
+        }
+        else {
+            ignore = false;
+        }
+        gen.setUpper(Integer.parseInt(upp.getText().toString()), ignore);
 
         try {
             if (setData()) {

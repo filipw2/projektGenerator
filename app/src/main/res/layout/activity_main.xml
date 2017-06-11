@@ -64,6 +64,13 @@
             android:layout_weight="0.33"
             android:inputType="number" />
     </LinearLayout>
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="@string/ignore" />
+
 
     <LinearLayout
         android:id="@+id/field_container"

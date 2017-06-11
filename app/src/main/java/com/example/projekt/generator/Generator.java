@@ -15,6 +15,7 @@ public class Generator {
     private String specialChars;
     private String allData;
     private int upperCount;
+    private boolean ignore=true;
 
     public static Generator instance;
 
@@ -98,6 +99,9 @@ public class Generator {
             //my test algorithm
             //spaces removal
             allData = allData.replaceAll("\\s+", "");
+            if(ignore){
+                allData=allData.toLowerCase();
+            }
             //password generation
             while (generated.length() < passwordLength) {
                 //beginning of the string
@@ -173,5 +177,5 @@ public class Generator {
         allData="";
     }
 
-    public void setUpper(int i){upperCount=i;}
+    public void setUpper(int i, boolean j){upperCount=i; ignore=j;}
 }
