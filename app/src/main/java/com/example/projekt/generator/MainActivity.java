@@ -1,9 +1,11 @@
 package com.example.projekt.generator;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -12,8 +14,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
+
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
@@ -117,9 +122,13 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO check if fields contain data
     private Boolean setData() {
+        int c=0;
         if (!editTextList.isEmpty())
             for (EditText e : editTextList) {
-                insertData(e);
+                if(!e.getText().toString().matches("")) {
+                    insertData(e);
+                    c++;
+                }
             }
         else
             return Boolean.FALSE;
@@ -128,10 +137,39 @@ public class MainActivity extends AppCompatActivity {
         try {
 
             passwordLength = Integer.parseInt(tv.getText().toString());
-            if (passwordLength < 1 || passwordLength > 30)
+            if (passwordLength < 6 || passwordLength > 30){
+                AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+                dlgAlert.setMessage("Długość powinna być >6 i <30");
+                dlgAlert.setTitle("Błąd");
+                dlgAlert.setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //dismiss the dialog
+                            }
+                        });
+                dlgAlert.setCancelable(true);
+                dlgAlert.create().show();
                 return Boolean.FALSE;
+            }
+
 
         } catch (NumberFormatException e) {
+            return Boolean.FALSE;
+        }
+
+        if(c<3) {
+            AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+            dlgAlert.setMessage("Musisz wypełnić co najmniej 3 pola");
+            dlgAlert.setTitle("Błąd");
+            dlgAlert.setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //dismiss the dialog
+                        }
+                    });
+            dlgAlert.setCancelable(true);
+            dlgAlert.create().show();
+
             return Boolean.FALSE;
         }
 
