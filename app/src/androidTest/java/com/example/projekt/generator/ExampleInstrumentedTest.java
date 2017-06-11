@@ -7,6 +7,8 @@ import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.EditText;
+import java.security.SecureRandom;
+import java.math.BigInteger;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -64,6 +66,21 @@ public class ExampleInstrumentedTest {
 
         onView(withId( et.getId())).check(matches(withText(text)));
 
+    }
+
+    @Test
+    public void testGenerating(){
+        int passLength=5;
+        SecureRandom random = new SecureRandom();
+        for (int i=0; i<100; i++) {
+            Generator.getInstance().clear();
+            String generatedS = new BigInteger(130, random).toString(32);
+            Generator.getInstance().insert(generatedS);
+            Generator.getInstance().generate(passLength);
+            String t = (String) Generator.getInstance().getPassword().get(0);
+            assertEquals(t.length(), passLength);
+            passLength++;
+        }
     }
 
 
