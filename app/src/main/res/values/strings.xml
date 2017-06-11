@@ -4,6 +4,7 @@
     <string name="title_activity_generator">GeneratorActivity</string>
     <string name="generator">Generator</string>
     <string name="exit">Wyjście</string>
-    <string name="podaj_d_ugo_has_a">Podaj długość hasła</string>
+    <string name="length">Podaj długość hasła</string>
+    <string name="generate">Generuj</string>
     <string name="input_placeholder">Wprowadź dane</string>
 </resources>

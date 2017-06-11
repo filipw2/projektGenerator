@@ -3,6 +3,7 @@ package com.example.projekt.generator;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
@@ -38,7 +39,35 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
+        final TextView tv = (EditText) findViewById(R.id.passwordLength);
+        tv.setFocusable(false);
+        tv.setEnabled(false);
+        tv.setText("6");
+        tv.setCursorVisible(false);
+        tv.setKeyListener(null);
+        tv.setBackgroundColor(Color.TRANSPARENT);
 
+        SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                //String t=tv.getText().toString();
+                //int s= Integer.parseInt(t);
+                //s+=progress;
+                //t=Integer.toString(s);
+                tv.setText(String.valueOf(progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
@@ -139,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
             passwordLength = Integer.parseInt(tv.getText().toString());
             if (passwordLength < 6 || passwordLength > 30){
                 AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
-                dlgAlert.setMessage("Długość powinna być >6 i <30");
+                dlgAlert.setMessage("Długość powinna być większa od 5");
                 dlgAlert.setTitle("Błąd");
                 dlgAlert.setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
