@@ -28,6 +28,7 @@ public class Generator {
         return instance;
     }
 
+    //find element in array
     private static boolean contains(final int[] array, final Integer v) {
         for (final int e : array)
             if (e == v || v != null && v.equals(e))
@@ -35,7 +36,7 @@ public class Generator {
 
         return false;
     }
-
+    
     private String upper(String generated, int count){
         char[] generatedChars = generated.toCharArray();
         int[] used = new int[count];

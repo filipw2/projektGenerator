@@ -19,6 +19,6 @@
     <string name="options">Ustawienia generacji</string>
     <string name="ignore">Ignorować wielkość liter wprowadzonych przez użytkownika</string>
     <string name="spec">Używać symboli specjalnych</string>
-    <string name="success">Hasła zostały wygenerowane</string>
+    <string name="success">Kliknij na wybrane hasło aby go skopiować</string>
     <string name="returner">Powrót</string>
 </resources>

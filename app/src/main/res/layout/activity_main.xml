@@ -24,95 +24,96 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/length" />
-    <LinearLayout
-        android:id="@+id/laytbtns"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/LstPeriodOptions" >
-        <SeekBar
-            android:id="@+id/seekBar"
-            android:layout_width="0dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="0.99"
-            android:progress="6"
-            android:max="30"
-            android:layout_height="match_parent" />
-
-        <EditText
-            android:id="@+id/passwordLength"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_weight="0.33"
-            android:inputType="number" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/upp" />
-    <LinearLayout
-        android:id="@+id/laytbtns2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/LstPeriodOptions" >
-        <SeekBar
-            android:id="@+id/seekBar2"
-            android:layout_width="0dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="0.99"
-            android:layout_height="match_parent" />
-
-        <EditText
-            android:id="@+id/upper"
-            android:layout_width="0dp"
+            android:text="@string/length" />
+        <LinearLayout
+            android:id="@+id/laytbtns"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_weight="0.33"
-            android:inputType="number" />
-    </LinearLayout>
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="@string/ignore" />
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/LstPeriodOptions" >
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="0dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0.99"
+                android:progress="6"
+                android:max="30"
+                android:layout_height="match_parent" />
 
+            <EditText
+                android:id="@+id/passwordLength"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_weight="0.33"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/upp" />
+        <LinearLayout
+            android:id="@+id/laytbtns2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/LstPeriodOptions" >
+            <SeekBar
+                android:id="@+id/seekBar2"
+                android:layout_width="0dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0.99"
+                android:layout_height="match_parent" />
+
+            <EditText
+                android:id="@+id/upper"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_weight="0.33"
+                android:inputType="number" />
+        </LinearLayout>
         <CheckBox
-            android:id="@+id/checkBox2"
+            android:id="@+id/checkBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="@string/spec" />
+            android:text="@string/ignore" />
+
+            <CheckBox
+                android:id="@+id/checkBox2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/spec" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/field_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    </LinearLayout>
 
 
-
-
-
-
+    <ScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_weight="2"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/field_container"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+            </LinearLayout>
+        </ScrollView>
 
     <LinearLayout
         android:id="@+id/button_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:layout_weight="2"
         android:gravity="bottom"
         android:orientation="vertical">
 

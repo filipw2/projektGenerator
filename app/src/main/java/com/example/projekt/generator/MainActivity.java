@@ -1,6 +1,5 @@
 package com.example.projekt.generator;
 
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,10 +8,11 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Layout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -20,11 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import receiver.WakefulReceiver;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,17 +30,19 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout myLayout;
     List<EditText> editTextList = new ArrayList<EditText>();
     private WakefulReceiver wr;
-    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     int passwordLength;
     boolean ignore=true;
     boolean specCase=true;
     boolean settingsVisible=false;
     TextView upp;
 
+    //action on created activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //prevent keyboard opening on program start
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
 
@@ -56,9 +55,11 @@ public class MainActivity extends AppCompatActivity {
                              }
         );
 
+        //hiding generating options by default
         myLayout = (LinearLayout) findViewById(R.id.settings_container);
         myLayout.setVisibility(LinearLayout.GONE);
 
+        //options fields config
         final TextView tv = (EditText) findViewById(R.id.passwordLength);
         tv.setFocusable(false);
         tv.setEnabled(false);
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         upp.setKeyListener(null);
         upp.setBackgroundColor(Color.TRANSPARENT);
 
+        //pass length configuration
         SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -83,16 +85,13 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) {}
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
+        //quantity of uppercase letters config
         SeekBar seekBar2 = (SeekBar) findViewById(R.id.seekBar2);
         seekBar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -101,14 +100,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStartTrackingTouch(SeekBar seekBar) {}
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -116,10 +111,8 @@ public class MainActivity extends AppCompatActivity {
 
         wr = new WakefulReceiver();
 
-
         gen = Generator.getInstance();
         ll = (LinearLayout) findViewById(R.id.field_container);
-
 
         Button b = (Button) findViewById(R.id.addButton);
         b.setOnClickListener(new Button.OnClickListener() {
@@ -161,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -169,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
     public void sendMessage(View view) {
         //clearing generator fields
         gen.clear();
-        //fetching data from user
+        //checking settings
         CheckBox cb = (CheckBox) findViewById(R.id.checkBox);
         CheckBox cb2 = (CheckBox) findViewById(R.id.checkBox2);
         if (cb.isChecked()) {
@@ -185,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
             specCase = false;
         }
         gen.setUpper(Integer.parseInt(upp.getText().toString()), ignore, specCase);
-
+        //fetching data from user
         try {
             if (setData()) {
 
@@ -195,17 +187,13 @@ public class MainActivity extends AppCompatActivity {
                 wr.setAlarm(this);
                 //creating new activity
                 Intent intent = new Intent(this, GeneratorActivity.class);
-
                 //starting new activity with results
                 startActivity(intent);
             }
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
     }
 
-
-    //TODO add scroll if there are too many fields
+    //TODO close keyboard on enter press
 
     private Boolean setData() {
         int c=0;
@@ -221,23 +209,20 @@ public class MainActivity extends AppCompatActivity {
 
         TextView tv = (EditText) findViewById(R.id.passwordLength);
         try {
-
             passwordLength = Integer.parseInt(tv.getText().toString());
-            if (passwordLength < 6 || passwordLength > 30){
+            //checking password length
+            if (passwordLength < 6){
                 AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
                 dlgAlert.setMessage(R.string.tooshort);
                 dlgAlert.setTitle(R.string.error);
                 dlgAlert.setPositiveButton(R.string.ok,
                         new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                //dismiss the dialog
-                            }
+                            public void onClick(DialogInterface dialog, int which) {}
                         });
                 dlgAlert.setCancelable(true);
                 dlgAlert.create().show();
                 return Boolean.FALSE;
             }
-
 
         } catch (NumberFormatException e) {
             return Boolean.FALSE;
@@ -249,9 +234,7 @@ public class MainActivity extends AppCompatActivity {
             dlgAlert.setTitle(R.string.error);
             dlgAlert.setPositiveButton(R.string.ok,
                     new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            //dismiss the dialog
-                        }
+                        public void onClick(DialogInterface dialog, int which) {}
                     });
             dlgAlert.setCancelable(true);
             dlgAlert.create().show();
@@ -263,7 +246,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void insertData(EditText et) {
-
         gen.insert(et.getText().toString());
     }
 
@@ -274,18 +256,23 @@ public class MainActivity extends AppCompatActivity {
         addField("Miejscowość");
     }
 
+
+
     private void addField() {
+
         EditText eT = new EditText(this);
         TableRow.LayoutParams params = new TableRow.LayoutParams(Toolbar.LayoutParams.MATCH_PARENT, Toolbar.LayoutParams.WRAP_CONTENT, 1.0f);
         eT.setLayoutParams(params);
         eT.setHint(R.string.input_placeholder);
         eT.setText("");
+        eT.setImeOptions(EditorInfo.IME_ACTION_DONE);
         eT.setId(View.generateViewId());
         editTextList.add(eT);
 
         ll.addView(eT);
     }
 
+    //show or hide generation options
     private void showHide() {
         myLayout = (LinearLayout) findViewById(R.id.settings_container);
         if(settingsVisible) {
@@ -302,6 +289,5 @@ public class MainActivity extends AppCompatActivity {
         addField();
         editTextList.get(editTextList.size() - 1).setHint(text);
     }
-
 
 }
