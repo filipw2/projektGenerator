@@ -4,7 +4,15 @@
     <string name="title_activity_generator">GeneratorActivity</string>
     <string name="generator">Generator</string>
     <string name="exit">Wyjście</string>
+    <string name="error">Błąd</string>
+    <string name="ok">OK</string>
+    <string name="upp">Procent dużych liter (%)</string>
+    <string name="tooshort">Długość powinna być większa od 5</string>
+    <string name="toofew">Musisz wypełnić co najmniej 3 pola</string>
     <string name="length">Podaj długość hasła</string>
     <string name="generate">Generuj</string>
     <string name="input_placeholder">Wprowadź dane</string>
+    <string name="name">Imię</string>
+    <string name="surname">Nazwisko</string>
+    <string name="location">Mejscowość</string>
 </resources>

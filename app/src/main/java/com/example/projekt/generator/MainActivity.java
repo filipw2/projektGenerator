@@ -47,15 +47,38 @@ public class MainActivity extends AppCompatActivity {
         tv.setKeyListener(null);
         tv.setBackgroundColor(Color.TRANSPARENT);
 
+        final TextView upp = (EditText) findViewById(R.id.upper);
+        upp.setFocusable(false);
+        upp.setEnabled(false);
+        upp.setText("0");
+        upp.setCursorVisible(false);
+        upp.setKeyListener(null);
+        upp.setBackgroundColor(Color.TRANSPARENT);
+
         SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                //String t=tv.getText().toString();
-                //int s= Integer.parseInt(t);
-                //s+=progress;
-                //t=Integer.toString(s);
                 tv.setText(String.valueOf(progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        SeekBar seekBar2 = (SeekBar) findViewById(R.id.seekBar2);
+        seekBar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                upp.setText(String.valueOf(progress));
+                gen.setUpper(Integer.parseInt(upp.getText().toString()));
             }
 
             @Override
@@ -168,9 +191,9 @@ public class MainActivity extends AppCompatActivity {
             passwordLength = Integer.parseInt(tv.getText().toString());
             if (passwordLength < 6 || passwordLength > 30){
                 AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
-                dlgAlert.setMessage("Długość powinna być większa od 5");
-                dlgAlert.setTitle("Błąd");
-                dlgAlert.setPositiveButton("OK",
+                dlgAlert.setMessage(R.string.tooshort);
+                dlgAlert.setTitle(R.string.error);
+                dlgAlert.setPositiveButton(R.string.ok,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 //dismiss the dialog
@@ -188,9 +211,9 @@ public class MainActivity extends AppCompatActivity {
 
         if(c<3) {
             AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
-            dlgAlert.setMessage("Musisz wypełnić co najmniej 3 pola");
-            dlgAlert.setTitle("Błąd");
-            dlgAlert.setPositiveButton("OK",
+            dlgAlert.setMessage(R.string.toofew);
+            dlgAlert.setTitle(R.string.error);
+            dlgAlert.setPositiveButton(R.string.ok,
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             //dismiss the dialog

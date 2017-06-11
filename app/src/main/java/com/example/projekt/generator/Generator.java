@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.lang.String;
 
+
 //Singleton
 public class Generator {
     private List data; //user data
@@ -13,6 +14,7 @@ public class Generator {
     private Random rn;
     private String specialChars;
     private String allData;
+    private int upperCount;
 
     public static Generator instance;
 
@@ -23,13 +25,28 @@ public class Generator {
         return instance;
     }
 
-    private String upper(String generated){
+    private static boolean contains(final int[] array, final Integer v) {
+        for (final int e : array)
+            if (e == v || v != null && v.equals(e))
+                return true;
+
+        return false;
+    }
+
+    private String upper(String generated, int count){
         char[] generatedChars = generated.toCharArray();
-        int upperLetters=rn.nextInt(generatedChars.length-2 - 1 + 1) + 1;
+        int[] used = new int[count];
         int ch;
-        for (int i=0; i<upperLetters; i++)
+        //while array cant be filled with 0, so I putted any unused big integer here
+        for (int j=0; j<count; j++)
+            used[j]=999;
+        for (int i=0; i<count; i++)
         {
             ch=rn.nextInt(generatedChars.length-1 - 0 + 1) + 0;
+            while(contains(used, ch)){
+                ch=rn.nextInt(generatedChars.length-1 - 0 + 1) + 0;
+            }
+            used[i]=ch;
             generatedChars[ch]=Character.toUpperCase(generatedChars[ch]);
         }
         generated=String.valueOf(generatedChars);
@@ -107,7 +124,11 @@ public class Generator {
             //should add settings for this later
             generated = specchar(generated, 'a');
             generated = specchar(generated, 's');
-            generated = upper(generated);
+            if(upperCount!=0) {
+                double ca=(double)passwordLength*(double)upperCount/(double)100;
+                int count = (int)Math.round(ca);
+                generated = upper(generated, count);
+            }
 
             //checking for duplicates
             if(c==0)
@@ -130,6 +151,7 @@ public class Generator {
     private Generator() {
         rn = new Random(new Date().getTime());
         allData="";
+        upperCount=0;
         data = new ArrayList();
         pass = new ArrayList();
         specialChars="!@#$%^&*()";
@@ -150,4 +172,6 @@ public class Generator {
     public void clearData(){
         allData="";
     }
+
+    public void setUpper(int i){upperCount=i;}
 }
