@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     int passwordLength;
     boolean ignore=true;
+    boolean specCase=true;
     boolean settingsVisible=false;
     TextView upp;
 
@@ -170,13 +171,20 @@ public class MainActivity extends AppCompatActivity {
         gen.clear();
         //fetching data from user
         CheckBox cb = (CheckBox) findViewById(R.id.checkBox);
+        CheckBox cb2 = (CheckBox) findViewById(R.id.checkBox2);
         if (cb.isChecked()) {
             ignore=true;
         }
         else {
             ignore = false;
         }
-        gen.setUpper(Integer.parseInt(upp.getText().toString()), ignore);
+        if (cb2.isChecked()) {
+            specCase=true;
+        }
+        else {
+            specCase = false;
+        }
+        gen.setUpper(Integer.parseInt(upp.getText().toString()), ignore, specCase);
 
         try {
             if (setData()) {

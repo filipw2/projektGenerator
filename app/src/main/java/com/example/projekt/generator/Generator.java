@@ -16,6 +16,7 @@ public class Generator {
     private String allData;
     private int upperCount;
     private boolean ignore=true;
+    private boolean specCase=true;
 
     public static Generator instance;
 
@@ -125,10 +126,15 @@ public class Generator {
                 }
             }
 
-            //should add settings for this later
-            generated = specchar(generated, 'a');
-            generated = specchar(generated, 's');
-            if(upperCount!=0) {
+            //special chars adding if enabled
+            if(specCase)
+            {
+                generated = specchar(generated, 'a');
+                generated = specchar(generated, 's');
+            }
+            //upper case letter adding if enabled
+            if(upperCount!=0)
+            {
                 double ca=(double)passwordLength*(double)upperCount/(double)100;
                 int count = (int)Math.round(ca);
                 generated = upper(generated, count);
@@ -177,5 +183,5 @@ public class Generator {
         allData="";
     }
 
-    public void setUpper(int i, boolean j){upperCount=i; ignore=j;}
+    public void setUpper(int i, boolean j, boolean k){upperCount=i; ignore=j; specCase=k;}
 }

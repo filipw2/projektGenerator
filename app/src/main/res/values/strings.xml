@@ -17,4 +17,5 @@
     <string name="location">Mejscowość</string>
     <string name="options">Ustawienia generacji</string>
     <string name="ignore">Ignorować wielkość liter wprowadzonych przez użytkownika</string>
+    <string name="spec">Używać symboli specjalnych</string>
 </resources>
