@@ -193,8 +193,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {}
     }
 
-    //TODO close keyboard on enter press
-
     private Boolean setData() {
         int c=0;
         if (!editTextList.isEmpty())

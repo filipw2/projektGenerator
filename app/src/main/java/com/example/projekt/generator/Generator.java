@@ -36,7 +36,7 @@ public class Generator {
 
         return false;
     }
-    
+
     private String upper(String generated, int count){
         char[] generatedChars = generated.toCharArray();
         int[] used = new int[count];
@@ -167,7 +167,6 @@ public class Generator {
         upperCount=0;
         data = new ArrayList();
         pass = new ArrayList();
-        specialChars="!@#$%^&*()";
     }
 
     public List getPassword() {
