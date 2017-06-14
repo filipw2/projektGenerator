@@ -1,0 +1,8 @@
+C:\Users\Adam\Desktop\EmailReplyCs\EmailReplyCs\EmailReplyCs\bin\Debug\EmailReplyCs.exe.config
+C:\Users\Adam\Desktop\EmailReplyCs\EmailReplyCs\EmailReplyCs\bin\Debug\EmailReplyCs.exe
+C:\Users\Adam\Desktop\EmailReplyCs\EmailReplyCs\EmailReplyCs\bin\Debug\EmailReplyCs.pdb
+C:\Users\Adam\Desktop\EmailReplyCs\EmailReplyCs\EmailReplyCs\bin\Debug\S22.Imap.dll
+C:\Users\Adam\Desktop\EmailReplyCs\EmailReplyCs\EmailReplyCs\bin\Debug\S22.Imap.xml
+C:\Users\Adam\Desktop\EmailReplyCs\EmailReplyCs\EmailReplyCs\obj\Debug\EmailReplyCs.csprojResolveAssemblyReference.cache
+C:\Users\Adam\Desktop\EmailReplyCs\EmailReplyCs\EmailReplyCs\obj\Debug\EmailReplyCs.exe
+C:\Users\Adam\Desktop\EmailReplyCs\EmailReplyCs\EmailReplyCs\obj\Debug\EmailReplyCs.pdb
